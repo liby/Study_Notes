@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .panel {
+      max-width: 300px;
+      border: 1px solid #000;
+      margin: 12px;
+    }
+
+    .panel > * {
+      padding: 12px;
+    }
+
+    .title {
+      border-bottom: 1px solid #000;
+    }
+
+    .footer {
+      border-top: 1px solid #000;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <panel>
+      <div class="title" slot="title">Yo.</div>
+      <div class="content" slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis pariatur dolorum voluptates labore delectus autem natus aspernatur, esse atque ipsum deleniti recusandae, at adipisci ab voluptatem nemo ratione ex architecto!</div>
+      <div class="footer" slot="footer">更多信息</div>
+    </panel>
+  </div>
+  <template id="panel-tpl">
+    <div class="panel">
+      <slot name="title"></slot>
+      <slot name="content"></slot>
+      <slot name="footer"></slot>
+    </div>
+  </template>
+  <script src="../lib/vue.js"></script>
+  <script src="./js/main.js"></script>
+</body>
+</html>

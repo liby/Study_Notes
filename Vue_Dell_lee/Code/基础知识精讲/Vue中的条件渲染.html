@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="../../lib/vue.js"></script>
+  <title>Vue中的条件渲染</title>
+</head>
+<body>
+  <div id="app">
+    <!-- <div v-if="condition === 'a'" data-set="v-if">This is A</div>
+    <div v-else-if="condition === 'b'">This is B</div>
+    <div v-else>This is others</div>
+    <div v-show="show" data-set="v-show">{{ message }}</div> -->
+    <!-- 这里给不同的type也可以让vue不去复用DOM
+    <div v-if="user">
+      用户名: <input type="text">
+    </div>
+    <div v-else>
+      邮箱名: <input type="Number">
+    </div> -->
+    <div v-if="user">
+      用户名: <input key="user">
+    </div>
+    <div v-else>
+      邮箱名: <input key="email">
+    </div>
+  </div>
+  <script>
+    new Vue({
+      el: "#app",
+      data() {
+        return {
+          message: "Hello World",
+          condition: 'a',
+          show: false,
+          user: false,
+        }
+      }
+    })
+  </script>
+</body>
+</html>

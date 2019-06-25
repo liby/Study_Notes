@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    class Student {
+      constructor(name, gender, score, qulity) {
+        this.name = name;
+        this.gender = name;
+        this.score = score;
+        this.qulity = qulity;
+      }
+
+      sunScore() {
+        return this.score + this.qulity;
+      }
+    }
+
+    var whh = new Student("whh", "男", 89, 90)
+    console.log(whh.sunScore());
+  </script>
+</body>
+
+</html>

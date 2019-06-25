@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    let studentCount = 0;
+
+    class Student {}
+
+    class StudentBuilder {
+      constructor() {
+        this.student = new Student();
+      }
+
+      setName(name) {
+        this.student.name = name;
+      }
+
+      setGender(gender) {
+        if (gender !== '男' && gender !== '女') {
+          throw '玩儿呢';
+        }
+        this.student.gender = gender;
+      }
+
+      setHairLength(hairlength) {
+        if ((this.student.gender === '男' && hairlength > 1) ||
+          (this.student.gender === '女' && hairlength > 25)) {
+          throw '回去理发';
+        }
+        this.student.hairlength = hairlength;
+      }
+
+      build() {
+        studentCount++;
+        console.log(studentCount);
+        return this.student;
+      }
+    }
+
+
+
+    const builder = new StudentBuilder();
+    builder.setName('王花花');
+    builder.setGender('男');
+    builder.setHairLength(1);
+    const whh = builder.build();
+
+    const builder1 = new StudentBuilder();
+    builder1.setName('李拴蛋');
+    builder1.setGender('女');
+    builder1.setHairLength(22);
+    const lsd = builder1.build();
+  </script>
+</body>
+
+</html>

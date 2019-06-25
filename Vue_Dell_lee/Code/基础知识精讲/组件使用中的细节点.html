@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="../../lib/vue.js"></script>
+  <title>组件使用中的细节点</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 在组件上使用ref,获取到的是子组件的引用 -->
+    <count ref="one" @change="handleChange"></count>
+    <count ref="two" @change="handleChange"></count>
+    <div>{{total}}</div>
+  </div>
+  <script>
+    Vue.component('count',{
+      template: `
+        <div @click='handleClick'>{{number}}</div>
+      `,
+      data() {
+        return {
+          number: 0,
+        }
+      },
+      methods: {
+        handleClick: function () {
+          this.number++;
+          this.$emit('change');
+        }
+      }
+    })
+    new Vue({
+      el: "#app",
+      data() {
+        return{
+          total: 0,
+        }
+      },
+      methods: {
+        handleChange: function () {
+          console.log('this.$refs.one :', this.$refs.one);
+          this.total = this.$refs.one.number + this.$refs.two.number
+        }
+      },
+    })
+  </script>
+</body>
+</html>

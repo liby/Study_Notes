@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var whh = {};
+    whh.name = 'whh';
+    whh.gender = '男';
+    whh.score = 93;
+    whh.qulity = 100;
+
+    function Student(name, gender, score, qulity) {
+      this.name = name
+      this.gender = gender
+      this.score = score
+      this.qulity = qulity
+
+      this.sumScore = function () {
+        return this.score + this.qulity;
+      }
+    }
+
+    var whh = new Student("whh", "男", 93, 100)
+    console.log(whh.name, whh.sumScore());
+  </script>
+</body>
+
+</html>

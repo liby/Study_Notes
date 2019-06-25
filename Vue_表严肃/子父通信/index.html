@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <balance></balance>
+  </div>
+  <template id="balance">
+    <div>
+      <show @show-balance="show_balance"></show>
+      <div v-if="show">你的余额是: $123</div>
+    </div>
+  </template>
+  <template id="show">
+    <button @click="on_click()">显示余额</button>
+  </template>
+  <script src="../lib/vue.js"></script>
+  <script src="./js/main.js"></script>
+</body>
+</html>
