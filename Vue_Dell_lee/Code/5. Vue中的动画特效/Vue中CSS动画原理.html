@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="../lib/vue.js"></script>
+  <title>Vue中CSS动画原理</title>
+  <style>
+    .show {
+      height: 200px;
+      background-color: red;
+    }
+    .fade-enter,
+    .fade-leave-to {
+      /* display: none; */
+      height: 0;
+    }
+    .fade-enter-active,
+    .fade-leave-active {
+      transition: all 10s
+    }
+  </style>
+</head>
+<body>
+  <div id="root">
+    <transition name="fade">
+      <ul v-show="show" class="show">
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+      </ul>
+    </transition>
+    <button @click="handleClick">切换</button>
+  </div>
+  <script>
+    new Vue({
+      el:"#root",
+      data() {
+        return {
+          show: false
+        }
+      },
+      methods: {
+        handleClick: function () {
+          this.show = !this.show
+        }
+      }
+    })
+  </script>
+</body>
+</html>

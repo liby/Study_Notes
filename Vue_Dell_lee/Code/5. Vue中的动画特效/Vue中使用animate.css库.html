@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="../lib/vue.js"></script>
+  <link href="https://cdn.bootcss.com/animate.css/3.7.2/animate.css" rel="stylesheet">
+  <title>Vue中使用animate.css库</title>
+  <style>
+    #root div {
+      margin: 10%;
+    }
+    #root button {
+      margin: 10%;
+    }
+    /* @keyframes bounce-in {
+      0% {
+        transform: scale(0);
+      }
+      50% {
+        transform: scale(8);
+      }
+      100% {
+        transform: scale(1);
+      }
+      
+    }
+    .v-enter-active {
+      animation: bounce-in 3s;
+      transform-origin: left center;
+    }
+    .v-leave-active {
+      transform-origin: left center;
+      animation: bounce-in 3s reverse;
+    } */
+  </style>
+</head>
+<body>
+  <div id="root">
+    <transition enter-active-class="animated flash" leave-active-class="animated wobble">
+      <div v-if="show">😘小😘萌😘你😘最😘美</div>
+    </transition>
+    <button @click="handleChange">😙</button>
+  </div>
+  <script>
+    new Vue({
+      el: "#root",
+      data() {
+        return {
+          show: false,
+        }
+      },
+      methods: {
+        handleChange: function () {
+          this.show = !this.show;
+        }
+      }
+    })
+  </script>
+</body>
+</html>
