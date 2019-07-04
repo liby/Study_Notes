@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="../lib/vue.js"></script>
+  <link rel="stylesheet" href="../lib/animate.css">
+  <style>
+    .v-enter,
+    .v-leave-to {
+      opacity: 0;
+    }
+    .v-enter-active,
+    .v-leave-active {
+      transition: opacity 1s;
+    }
+  </style>
+  <title>Vue中同时使用过渡和动画</title>
+</head>
+<body>
+  <div id="root">
+    <!-- 给transition设置type属性为transition,就可以指定transition的过渡效果时长为动画的总时长
+    还可以利用duration属性来手动设置动画时长 -->
+    <transition
+      :duration="{enter: 5000, leave: 10000}"
+      appear
+      enter-active-class="animated swing v-enter-active"
+      leave-active-class="animated shake v-leave-active"
+      appear-active-class="animated swing"
+    >
+      <div v-show="show">Hello</div>
+    </transition>
+    <button @click="handleChange">切换</button>
+  </div>
+  <script>
+    new Vue({
+      el: "#root",
+      data() {
+        return {
+          show: true,
+        }
+      },
+      methods: {
+        handleChange: function () {
+          this.show = !this.show
+        }
+      },
+    })
+  </script>
+</body>
+</html>
