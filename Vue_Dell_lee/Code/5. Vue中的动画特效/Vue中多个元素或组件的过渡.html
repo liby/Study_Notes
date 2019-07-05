@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="../lib/vue.js"></script>
+  <script src="../lib/velocity.js"></script>
+  <style>
+    .v-enter,
+    .v-leave-to {
+      opacity: 0;
+    }
+    .v-enter-active,
+    .v-leave-active {
+      transition: opacity 1s;
+    }
+  </style>
+  <title>Vue中多个元素或组件的过渡</title>
+</head>
+<body>
+  <div id="root">
+    <transition mode="out-in">
+      <component :is="type"></component>
+    </transition>
+    <button @click="handleClick">切换</button>
+  </div>
+  <script>
+    Vue.component('child1', {
+      template: '<div>child1</div>'
+    })
+    Vue.component('child2', {
+      template: '<div>child2</div>'
+    })
+    new Vue({
+      el: "#root",
+      data() {
+        return {
+          type: 'child1',
+        }
+      },
+      methods: {
+        handleClick: function () {
+          this.type = this.type === 'child1' ? 'child2' : 'child1';
+        }
+      },
+    })
+  </script>
+</body>
+</html>
