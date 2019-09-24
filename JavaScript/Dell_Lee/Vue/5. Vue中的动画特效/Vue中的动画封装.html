@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue中的动画封装</title>
+  <script src="../lib/velocity.js"></script>
+  <script src="../lib/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <fade :show="show">
+      <div>Hello</div>
+    </fade>
+    <fade :show="show">
+      <h2>Hello</h2>
+    </fade>
+    <button @click="handleClick">切换</button>
+  </div>
+  <script>
+    // 把所有的动画实现都封装在组件里面,只需要调用组件,而不用在全局定义样式
+    Vue.component('fade', {
+      props: ['show'],
+      template: `
+        <transition
+          @before-enter="handleBeforeEnter"
+          @enter="handleEnter"
+          @after-enter="handleLeave"
+        >
+          <slot v-if="show"></slot>
+        </transition>
+      `,
+      methods: {
+        handleBeforeEnter: function (el) {
+          el.style.color = 'red'
+        },
+        handleEnter: function (el, done) {
+          setTimeout( () => {
+            el.style.color = 'blue'
+          }, 2000);
+          setTimeout( () => {
+            done()
+          }, 4000)
+        },
+        handleLeave: function (el) {
+          el.style.color = 'black'
+        }
+      }
+    })
+    new Vue({
+      el: "#root",
+      data() {
+        return {
+          show: false,
+        }
+      },
+      methods: {
+        handleClick: function () {
+          this.show = !this.show;
+        },
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="../lib/vue.js"></script>
+  <title>Vue中的列表渲染</title>
+</head>
+<body>
+  <div id="app">
+    <!-- <ol>
+      不推荐用index作为key值,推荐用后端返回的每一条数据的id作为key值
+      <li v-for="(item, index) of list" :key="item.id">{{item.text}} ---- {{index}}</li>
+    </ol> -->
+    <!-- 这里可以把template当作占位符,帮助我们去包裹一些元素,在循环过程中不会被渲染到页面上
+    <template v-for="(item, index) in list" :key="item.id">
+      <div> {{index}} </div>
+      <span> {{item}} </span>
+    </template> -->
+    <div v-for="(item, key, index) in userInfo" :key="index">
+      {{index}} --- {{key}} --- {{item}}
+    </div>
+  </div>
+  <script>
+    // vue中尝试修改数组内容来使页面变化时,不能直接通过下标去修改,要使用vue中的7种数组变异方法
+    // push pop shift unshift splice sort reverse
+    new Vue({
+      el: "#app",
+      data() {
+        return {
+          //直接改变数据的引用,页面也会改变
+          list: [
+            {id:'1', text: 'hello'},
+            {id:'2', text: 'nihao'},
+            {id:'3', text: 'Lee'}
+          ],
+          //遍历对象时,动态的修改对象是不会使页面改变的,但是可以改变对象的引用来使页面改变
+          userInfo: {
+            name: "Dell",
+            age: 28,
+            gender: "male",
+            salary: "secret"
+          }
+        }
+      }
+    })
+  </script>
+</body>
+</html>

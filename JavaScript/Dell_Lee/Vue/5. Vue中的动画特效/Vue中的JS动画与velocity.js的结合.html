@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="../lib/vue.js"></script>
+  <script src="../lib/velocity.js"></script>
+  <title>Vue中的JS动画与velocity.js的结合</title>
+</head>
+
+<body>
+  <div id="root">
+    <!-- 出场动画的钩子:beforeLeave和afterLeave -->
+    <transition
+      @before-enter="before" 
+      @enter="enter"
+      @after-enter="after"
+    >
+      <div v-if="show">Hello</div>
+    </transition>
+    <button @click="handleClick">切换</button>
+  </div>
+  <script>
+    new Vue({
+      el: "#root",
+      data() {
+        return {
+          show: true,
+        }
+      },
+      methods: {
+        handleClick: function () {
+          this.show = !this.show;
+        },
+        before: function (el) {
+          el.style.opacity= 0;
+        },
+        enter: function (el, done) {
+          Velocity(el, {
+            opacity: 1
+          },{
+            duration: 1000,
+            complete: done
+          })
+        },
+        after: function (el) {
+          console.log('完成 :', 完成);
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>

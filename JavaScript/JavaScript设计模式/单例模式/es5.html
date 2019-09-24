@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function Resource() {
+      if (Resource.instance) {
+        console.log('这个例子是:', Resource.instance);
+        return Resource.instance;
+      } else {
+        this.balance = 100;
+        Resource.instance = this;
+        let count = 0;
+        console.log(count);
+      }
+    }
+
+    var r = new Resource();
+    console.log('r:', r);
+
+    r.balance = 50;
+    console.log('r:', r);
+
+    var r2 = new Resource();
+    console.log('r2:', r2);
+
+    r.balance = 55;
+    console.log('r2现在的值:', r2);
+  </script> 
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    <div>采购余额: <span id="balance">100</span>元</div>
+    <div class="page a">
+      部门A:
+      <input type="number">
+      <button class="add">+</button>
+      <button class="sub">-</button>
+    </div>
+    <div class="page b">
+      部门B:
+      <input type="number">
+      <button class="add">+</button>
+      <button class="sub">-</button>
+    </div>
+
+  </div>
+  <script>
+    var elBalance = document.getElementById('balance');
+    init();
+    function init() {
+      var a = new Division('.page.a');
+      var b = new Division('.page.b');
+    }
+
+    function renderBalance(){
+      var resource = new Resource();
+      elBalance.innerText = resource.balance;
+    }
+    function Division(selector) {
+      var resource = new Resource();
+      this.el = document.querySelector(selector)
+      
+      this.elAdd = this.el.querySelector('.add');
+      this.elSub = this.el.querySelector('.sub');
+      this.elInput = this.el.querySelector('input')
+      var me = this;
+
+      this.elAdd.addEventListener('click', function () {
+        var j = me.elInput.value;
+        console.log('清空前的J:', j);
+        resource.add(j);
+        j = '';
+        console.log('清空后的J:', j);
+        renderBalance();
+      })
+
+      this.elSub.addEventListener('click', function () {
+        var i = me.elInput;
+        console.log('清空前的i:', i);
+        resource.sub(i.value);
+        i.value = '';
+          console.log('清空后的i:', i);
+        renderBalance();
+      })
+    }
+
+    function Resource() {
+      if (Resource.instance) {
+        return Resource.instance;
+      } else {
+        this.balance = 100;
+        Resource.instance = this;
+      }
+    }
+
+    Resource.prototype.add = function(num) {
+      this.change(num);
+    }
+    Resource.prototype.sub = function(num) {
+      this.change(-num);
+    }
+
+    Resource.prototype.change = function (num) {
+      if (!num) {
+        return;
+      }
+
+      this.balance += parseFloat(num);
+    }
+  </script> 
+</body>
+</html>

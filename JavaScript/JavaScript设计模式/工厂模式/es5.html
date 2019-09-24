@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function Student(name, subjects) {
+      this.name = name;
+      this.subjects = subjects;
+    }
+
+    function factory(name, type) {
+      switch (type) {
+        case '文科':
+          return new Student(name, ['政治', '历史', '地理']);
+          break;
+        case '理科':
+          return new Student(name, ['数学', '物理', '化学']);
+        case '体育':
+          return new Student(name, ['长跑', '铅球', '跳高']);
+          break;
+        default:
+          throw '没有这个学科'
+      }
+    }
+
+    var whh = factory('王花花', '文科')
+    var lsd = factory('李拴蛋', '理科')
+    console.log(whh);
+    console.log(lsd);
+  </script>
+</body>
+</html>

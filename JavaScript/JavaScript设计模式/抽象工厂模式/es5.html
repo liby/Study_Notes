@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function Student() {
+      this.intro = '学生';
+    }
+
+    function Teacher() {
+      this.intro = '老师';
+    }
+
+    function studentFactory () {
+      return new Student();
+    }
+
+    function teacherFactory () {
+      return new Teacher();
+    }
+
+    function userProducer (factory) {
+      switch (factory) {
+        case 'student':
+          return studentFactory;
+          break;
+        case 'teacher':
+          return teacherFactory;
+          break;
+        default:
+          throw '没有这样的工厂';
+      }
+    }  
+
+    var x = userProducer('student')();
+    console.log(x);
+  </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="../lib/vue.js"></script>
+  <title>在组件上使用v-for</title>
+</head>
+<body>
+  <div id="app">
+    <form @submit.prevent="addNewTodo">
+      <label for="todo-list">Add</label>
+      <input 
+        type="text" 
+        id="todo-list" 
+        placeholder="请输入"
+        v-model="newTodoText"
+      >
+      <button >Add</button>
+    </form>
+    <ol>
+      <li
+        is="todo-item"
+        v-for="(item, index) in todoList" 
+        :key="item.id"
+        :title="item.title"
+        @remove="todoList.splice(index, 1)"
+      >
+      </li>
+    </ol>
+  </div>
+  <script src="./v-for.js"></script>
+</body>
+</html>

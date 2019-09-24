@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+  <title>TodoList_jQuery</title>
+</head>
+<body>
+  <div>
+    <!-- Model 数据层,主要是远端数据的ajax的请求 -->
+    <!-- View 视图层 -->
+    <input type="text" id="input">
+    <button id="btn">提交</button>
+    <ul id="list"></ul>
+  </div>
+  <script>
+    // Presenter 控制器,百分之七八十的代码都在操作DOM
+    function Page() {
+
+    }
+    $.extend(Page.prototype, {
+      init: function() {
+        this.bindEvents()
+      },
+      bindEvents: function() {
+        var btn =$('#btn');
+        btn.on('click', $.proxy(this.hanleBtnClick, this))
+      },
+      hanleBtnClick: function() {
+        var inputElem = $("#input");
+        var inputValue = inputElem.val();
+        var inputValue = $("#input").val();
+        var ulElem = $("#list");
+        ulElem.append('<li>' + inputValue + '</li>');
+        inputElem.val('');
+      }
+    })
+    var page = new Page();
+    page.init()
+  </script>
+</body>
+</html>

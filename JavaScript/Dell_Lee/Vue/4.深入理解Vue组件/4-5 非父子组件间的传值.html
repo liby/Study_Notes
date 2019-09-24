@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="../lib/vue.js"></script>
+  <title>非父子组件间的传值</title>
+</head>
+
+<body>
+  <div id="app">
+    <child content="dell"></child>
+    <child content="lee"></child>
+  </div>
+
+  <script>
+    //给Vue的prototype绑定一个bus
+    Vue.prototype.bus = new Vue();
+
+    Vue.component('child', {
+      props: {
+        content: String
+      },
+      data: function () {
+        return {
+          selfContent: this.content
+        }
+      },
+
+      template: '<div @click="handleClick">{{content}}</div>',
+      methods: {
+        handleClick: function () {
+          //向外触发事件
+          this.bus.$emit('change', this.content);
+        }
+      },
+      mounted: function () {
+        var this_ = this;
+        //进行事件的监听
+        this.bus.$on('change', function (msg) {
+          this_.content = msg
+          console.log('this.content :', this_.content);
+        })
+      }
+    });
+
+    var vm = new Vue({
+      el: "#app",
+    });
+  </script>
+</body>
+
+</html>

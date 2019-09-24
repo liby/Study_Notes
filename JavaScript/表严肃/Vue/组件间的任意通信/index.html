@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <huahua></huahua>
+    <shuandan></shuandan>
+  </div>
+  <template id="huahua">
+    <div>
+      我说: <input type="text" v-model="i_said" @keyup="on_change">
+    </div>
+  </template>
+  <template id="shuandan">
+    <div>
+      花花说: {{ huahua_said }}
+    </div>
+  </template>
+  <script src="../lib/vue.js"></script>
+  <script src="./js/main.js"></script>
+</body>
+</html>

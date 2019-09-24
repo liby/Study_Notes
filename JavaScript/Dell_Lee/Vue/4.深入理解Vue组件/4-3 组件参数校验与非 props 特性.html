@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="../lib/vue.js"></script>
+  <title>组件参数校验与非Props特性</title>
+</head>
+<body>
+  <div id="app">
+    <child :content="'hello world'"></child>
+  </div>
+  <!-- 非Props是指父组件向子组件传递了一个属性,子组件没有声明要接收的父组件属性 -->
+  <!-- 页面会报错,父组件传递的属性也会渲染到子组件上的DOM上 -->
+  <script>
+    Vue.component('child',{
+      props: {
+        content: {
+          type: [String, Number],
+          required: false,
+          default: 1,
+          validator: function(value) {
+            return (value.length > 5);
+          }
+        }
+      },
+      template: `
+        <div>{{content}}</div>
+      `,
+    })
+
+    new Vue({
+      el: '#app'
+    })
+  </script>
+</body>
+</html>

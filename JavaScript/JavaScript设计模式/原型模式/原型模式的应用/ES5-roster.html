@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <table id="roster"></table>
+  <script>
+    var rootElement = document.getElementById('roster');
+
+    function Student(name, gender, score) {
+      this.name = name;
+      this.gender = gender;
+      this.score = score;
+      this.quality = 100;
+
+      this.mount();
+    }
+
+    Student.prototype.sumScore = function () {
+      return this.quality + this.score;
+    }
+
+    Student.prototype.mount = function () {
+      var tr = document.createElement('tr');
+
+      tr.innerHTML = 
+        '<td>' + this.name + '</td>' +
+        '<td>' + this.gender + '</td>' +
+        '<td>' + this.score + '</td>' +
+        '<td>' + this.quality + '</td>' +
+        '<td>' + this.sumScore() + '</td>';
+
+      rootElement.appendChild(tr);
+    }
+
+    var whh = new Student('王花花', '男', 88);
+    var lsd = new Student('李拴蛋', '女', 93);
+  </script>
+</body>
+</html>

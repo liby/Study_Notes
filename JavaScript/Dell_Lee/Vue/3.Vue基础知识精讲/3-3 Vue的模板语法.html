@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="../lib/vue.js"></script>
+  <title>模板语法</title>
+</head>
+<body>
+  <div id="app">
+    <div>{{ msg + '<p>Lee</p>' }}</div>
+    <div v-text="name + ' Lee'"></div>
+    <div v-html="msg + '<div>Lee</div>'" :title="name"></div>
+  </div>
+  <script>
+    vm = new Vue({
+      el: '#app',
+      data: {
+        name: "Dell",
+        msg:"<h1>Dell</h1>"
+      }
+    })
+  </script>
+</body>
+</html>

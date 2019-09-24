@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="../lib/vue.js"></script>
+  <title>计算属性、方法、侦听器</title>
+</head>
+<body>
+  <!-- 一个功能可以同时通过以下三种方法实现时,优先推荐computed,=代码简洁,性能高 -->
+  <div id="app">
+    <div>
+      {{'侦听器实现:' + fullName2}}
+    </div>
+    <div>
+      {{'方法实现:' + fullName1()}}
+    </div>
+    <div>
+      {{'计算属性实现:' + fullName}}
+    </div>
+    {{age}}
+  </div>
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        firstName: "Dell",
+        lastName: "Lee",
+        fullName2: "Dell Lee",
+        age: 28,
+      },
+      //侦听器
+      watch: {
+        //一开始就存在fullName2,所以不会运行
+        firstName: function() {
+          this.fullName2 = this.firstName + ' ' + this.lastName;
+          console.log('watch :','fullName2');
+        },
+        lastName: function() {
+          this.fullName2 = this.firstName + ' ' + this.lastName;
+          console.log('watch :','fullName2');
+        },
+      },
+      //方法
+      methods: {
+        //不会缓存
+        fullName1: function() {
+          console.log('methods :','fullName1');
+          return this.firstName + ' ' + this.lastName
+        }
+      },
+      //计算属性
+      computed: {
+        fullName: function () {
+          console.log('computed :', 'fullName');
+          // 依赖的变量没有发生任何改变时,这个计算属性不会重新调用,性能更好一些
+          return this.firstName + ' ' + this.lastName
+        }
+      }
+    })
+  </script>
+</body>
+</html>

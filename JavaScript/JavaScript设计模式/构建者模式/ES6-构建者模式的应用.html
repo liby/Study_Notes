@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <form id="create">
+    <div>
+      姓名:
+      <input type="text" name="name" autofocus>
+    </div>
+    <div>
+      性别:
+      <input type="radio" value="女" checked name="gender">女
+      <input type="radio" value="男" name="gender">男
+    </div>
+    <div>
+      头发长度:
+      <input type="number" name="hairLength">
+    </div>
+    <button type="submit">创建</button>
+  </form>
+  <script>
+    const createForm = document.getElementById('create');
+    init()
+
+    function init() {
+      createForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const name = document.querySelector('[name=name]').value;
+        const gender = document.querySelector('[name=gender]:checked').value;
+        const hairLength = document.querySelector('[name=hairLength]').value;
+        
+        let student
+        try {
+          const builder = new StudentBuilder();
+          builder.setName(name);
+          builder.setGender(gender);
+          builder.setHairLength(hairLength);
+
+          student = builder.build();
+        } catch (e) {
+          alert(e);
+        }
+
+        console.log(student);
+      });
+    }
+
+    class Student {}
+
+    class StudentBuilder {
+      constructor() {
+        this.student = new Student();
+      }
+
+      setName(name) {
+        this.student.name = name;
+      }
+
+      setGender(gender) {
+        this.student.gender = gender;
+      }
+
+      setHairLength(hairLength) {
+        if (
+          (this.student.gender === '男' && hairLength > 1) ||
+          (this.student.gender === '女' && hairLength > 25)
+        ) {
+          throw '回去理发'
+        }
+        this.student.hairLength = hairLength;
+      }
+
+      build() {
+        return this.student;
+      }
+    }
+  </script>
+</body>
+
+</html>
